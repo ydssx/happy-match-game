@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Match AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom bounce animation for selected tiles */
+      @keyframes bounce-small {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+      .animate-bounce-small {
+        animation: bounce-small 0.5s infinite;
+      }
+
+      /* Tile Creation */
+      @keyframes pop-in {
+        0% { transform: scale(0); opacity: 0; }
+        60% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .animate-pop-in {
+        animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      /* Tile Destruction */
+      @keyframes shrink-out {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(0); opacity: 0; }
+      }
+      .animate-shrink-out {
+        animation: shrink-out 0.25s ease-in forwards;
+      }
+
+      /* Invalid Move Shake */
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-4px) rotate(-5deg); }
+        40% { transform: translateX(4px) rotate(5deg); }
+        60% { transform: translateX(-2px) rotate(-3deg); }
+        80% { transform: translateX(2px) rotate(3deg); }
+      }
+      .animate-shake {
+        animation: shake 0.3s ease-in-out;
+      }
+
+      /* Horizontal Beam */
+      @keyframes beam-expand-x {
+        0% { transform: scaleX(0); opacity: 0.8; }
+        50% { transform: scaleX(1); opacity: 1; }
+        100% { transform: scaleX(1); opacity: 0; }
+      }
+      .animate-beam-x {
+        animation: beam-expand-x 0.3s ease-out forwards;
+      }
+
+      /* Vertical Beam */
+      @keyframes beam-expand-y {
+        0% { transform: scaleY(0); opacity: 0.8; }
+        50% { transform: scaleY(1); opacity: 1; }
+        100% { transform: scaleY(1); opacity: 0; }
+      }
+      .animate-beam-y {
+        animation: beam-expand-y 0.3s ease-out forwards;
+      }
+
+      /* Bomb Shockwave */
+      @keyframes shockwave {
+        0% { transform: scale(0.1); opacity: 1; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+      .animate-shockwave {
+        animation: shockwave 0.4s ease-out forwards;
+      }
+      
+      /* Rainbow Flash */
+      @keyframes rainbow-flash {
+        0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+        50% { opacity: 0.8; transform: scale(1.2) rotate(180deg); }
+        100% { opacity: 0; transform: scale(1.5) rotate(360deg); }
+      }
+      .animate-rainbow {
+        animation: rainbow-flash 0.6s ease-out forwards;
+      }
+
+      /* Combo Pulse */
+      @keyframes pulse-fast {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+      }
+      .animate-pulse-fast {
+        animation: pulse-fast 0.3s ease-in-out infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-white overflow-hidden touch-none selection:bg-none">
+    <div id="root"></div>
+  </body>
+</html>
